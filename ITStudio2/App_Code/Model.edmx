@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ITStudioModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ITStudioModelStoreContainer">
+          <EntitySet Name="admins" EntityType="ITStudioModel.Store.admins" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="applications" EntityType="ITStudioModel.Store.applications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="members" EntityType="ITStudioModel.Store.members" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="notices" EntityType="ITStudioModel.Store.notices" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="works" EntityType="ITStudioModel.Store.works" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="workTypes" EntityType="ITStudioModel.Store.workTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="outWorks" EntityType="ITStudioModel.Store.outWorks" store:Type="Views" store:Schema="dbo" store:Name="outWorks">
+            <DefiningQuery>SELECT 
+      [outWorks].[memberId] AS [memberId], 
+      [outWorks].[workId] AS [workId], 
+      [outWorks].[picture] AS [picture], 
+      [outWorks].[time] AS [time], 
+      [outWorks].[title] AS [title], 
+      [outWorks].[introduction] AS [introduction], 
+      [outWorks].[id] AS [id]
+      FROM [dbo].[outWorks] AS [outWorks]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="admins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="applications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="gender" Type="bit" Nullable="false" />
+          <Property Name="major" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="tel" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+          <Property Name="job" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="introduction" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="grade" Type="int" Nullable="false" />
+          <Property Name="photo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="job" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="direction" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="introduction" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="others" Type="nvarchar(max)" />
+          <Property Name="ico" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="notices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+          <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="works">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="typeId" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="time" Type="nvarchar" MaxLength="50" />
+          <Property Name="picture" Type="nvarchar" MaxLength="50" />
+          <Property Name="link" Type="nvarchar(max)" />
+          <Property Name="introduction" Type="nvarchar(max)" />
+          <Property Name="author" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="workTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+      警告 6002: 表/视图“ITStudio.dbo.outWorks”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+        <EntityType Name="outWorks">
+          <Key>
+            <PropertyRef Name="memberId" />
+            <PropertyRef Name="workId" />
+            <PropertyRef Name="picture" />
+            <PropertyRef Name="time" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="introduction" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="memberId" Type="int" Nullable="false" />
+          <Property Name="workId" Type="int" Nullable="false" />
+          <Property Name="picture" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="time" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="introduction" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ITStudioModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ITStudioEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="ITStudioModel.admins" />
+          <EntitySet Name="applications" EntityType="ITStudioModel.applications" />
+          <EntitySet Name="members" EntityType="ITStudioModel.members" />
+          <EntitySet Name="notices" EntityType="ITStudioModel.notices" />
+          <EntitySet Name="works" EntityType="ITStudioModel.works" />
+          <EntitySet Name="workTypes" EntityType="ITStudioModel.workTypes" />
+          <EntitySet Name="outWorks" EntityType="ITStudioModel.outWorks" />
+        </EntityContainer>
+        <EntityType Name="admins">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="applications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="gender" Type="Boolean" Nullable="false" />
+          <Property Name="major" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="tel" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="job" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="introduction" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="grade" Type="Int32" Nullable="false" />
+          <Property Name="photo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="job" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="direction" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="introduction" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="others" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ico" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="notices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="works">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="typeId" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="time" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="picture" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="link" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="introduction" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="author" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="workTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="outWorks">
+          <Key>
+            <PropertyRef Name="memberId" />
+            <PropertyRef Name="workId" />
+            <PropertyRef Name="picture" />
+            <PropertyRef Name="time" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="introduction" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="memberId" Type="Int32" Nullable="false" />
+          <Property Name="workId" Type="Int32" Nullable="false" />
+          <Property Name="picture" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="time" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="introduction" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ITStudioModelStoreContainer" CdmEntityContainer="ITStudioEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="ITStudioModel.admins">
+              <MappingFragment StoreEntitySet="admins">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="applications">
+            <EntityTypeMapping TypeName="ITStudioModel.applications">
+              <MappingFragment StoreEntitySet="applications">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="major" ColumnName="major" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="introduction" ColumnName="introduction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="ITStudioModel.members">
+              <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="direction" ColumnName="direction" />
+                <ScalarProperty Name="introduction" ColumnName="introduction" />
+                <ScalarProperty Name="others" ColumnName="others" />
+                <ScalarProperty Name="ico" ColumnName="ico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notices">
+            <EntityTypeMapping TypeName="ITStudioModel.notices">
+              <MappingFragment StoreEntitySet="notices">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="works">
+            <EntityTypeMapping TypeName="ITStudioModel.works">
+              <MappingFragment StoreEntitySet="works">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="typeId" ColumnName="typeId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="introduction" ColumnName="introduction" />
+                <ScalarProperty Name="author" ColumnName="author" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="workTypes">
+            <EntityTypeMapping TypeName="ITStudioModel.workTypes">
+              <MappingFragment StoreEntitySet="workTypes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="outWorks">
+            <EntityTypeMapping TypeName="ITStudioModel.outWorks">
+              <MappingFragment StoreEntitySet="outWorks">
+                <ScalarProperty Name="memberId" ColumnName="memberId" />
+                <ScalarProperty Name="workId" ColumnName="workId" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="introduction" ColumnName="introduction" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
