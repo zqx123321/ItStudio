@@ -11,7 +11,7 @@ public partial class ValidateCode : System.Web.UI.Page
     {
 
         Captcha cap = new Captcha();
-        string Code = cap.CreateVerifyCode(10,3);
+        string Code = cap.CreateVerifyCode(20,5);
         Session["Code"] = (Code.ToString()).ToLower();
         System.Drawing.Bitmap bitmap = cap.CreateImage(Code);
         System.IO.MemoryStream ms = new System.IO.MemoryStream();

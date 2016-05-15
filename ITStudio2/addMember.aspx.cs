@@ -114,6 +114,7 @@ public partial class addMember : System.Web.UI.Page
             content = content.Replace("\n", "<br />"); // 尝试替换\n为<br />
             string photo = uploadWorkPho();
             string ico = uploadWorkIco();
+            if (photo == null || ico == null) return;
             using (var db = new ITStudioEntities())
             {
                 var mem = new members();

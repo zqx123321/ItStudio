@@ -14,8 +14,14 @@ public partial class addWork : System.Web.UI.Page
     }
 
 
-    void submitWork(int typeId, string title, string time, string introduction, string workPicName, string link,string author)
+    bool submitWork(int typeId, string title, string time, string introduction, string workPicName, string link,string author)
     {
+        if (workPicName == null) {
+            lblUploadMessage.Visible = true;
+            return false;
+        
+        }
+
         using (var db =new ITStudioEntities())
         {
             var work = new works(); // 要添加的作品
@@ -28,8 +34,7 @@ public partial class addWork : System.Web.UI.Page
             work.author = author;
             db.works.Add(work);
             db.SaveChanges();
-
-            
+            return true;          
         }
     }
 
@@ -86,7 +91,7 @@ public partial class addWork : System.Web.UI.Page
         int typeId = Convert.ToInt32(ddlType.SelectedValue);
         string link = txtLink.Text;
         string author = txtmaker.Text;
-        submitWork(typeId, title, time, introduction, workPicName, link,author); // 添加作品
+        if(submitWork(typeId, title, time, introduction, workPicName, link,author))
         Response.Write("<script>alert('上传成功!'),location='addWork.aspx' </script>");
     }
 }

@@ -52,7 +52,14 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a title="刷新验证码" href="#" onclick="javascript:document.getElementById('valiCode').src='ValidateCode.aspx?id='+Math.random();return false;">
                                   看不清，换张图片？</a>
                                                          </td></tr>
-                                        <tr class="bt" align="center"><td>&nbsp; <asp:Button ID="BtnLogin" runat="server" OnClick="BtnLogin_Click" Text="登录" /></td><td>&nbsp;<asp:Button ID="BtnRevert" runat="server" OnClick ="BtnRevert_Click" Text="重填" /></td></tr>
+                                         <tr class="bt" align="center"><td>&nbsp; <asp:Button ID="BtnLogin" runat="server" OnClick="BtnLogin_Click" Text="登录" /></td><td>&nbsp;<asp:Button ID="BtnRevert" runat="server" OnClick ="BtnRevert_Click" Text="重填" /></td></tr>
+                                         <tr><td colspan="2"><h4 style="font-size:16px;"><asp:LinkButton ID="want" runat="server" Text="  &nbsp;&nbsp;  验证码太复杂，不想输入？点我" OnClick="want_Click"></asp:LinkButton></h4></td></tr>
+                                         <tr><td colspan="2"><asp:Label ID="question" runat="server" Text="你是笨蛋吗：   回答：" Visible="false"></asp:Label>&nbsp;&nbsp;&nbsp; <asp:TextBox ID="answer" runat="server" Visible="false"></asp:TextBox>
+                                             &nbsp;&nbsp;
+                                             <asp:Button ID="submit" Text="提交" runat="server"  OnClick="submit_Click" Visible="false"/>
+                                             </td></tr>
+                                        <tr><td colspan="5"><asp:Label ID="right" runat="server" Text="你很诚实，奖励你万能验证码一枚  woshibendan " Visible="false"></asp:Label></td>
+                                            </tr>
                                     </table>
                                 </form>
                             </td>

@@ -58,16 +58,18 @@ public partial class editWork : System.Web.UI.Page
             string uploadFileType = this.fulPicture.PostedFile.ContentType.ToLower();
             if (!uploadFileType.Contains("image"))    //图片的MIME类型为"image/xxx"，这里只判断是否图片。 
             {
-                lblUploadMessage.Text = "只能上传图片类型文件！";
                 lblUploadMessage.Visible = true;
-                return null;
+                lblUploadMessage.Text = "只能上传图片类型文件！";
+                
+                return "error";
             }
 
             if (fulPicture.FileContent.Length > maxFileSize) // 限制为3MiB以下
-            {
-                lblUploadMessage.Text = "图片文件大小不可超过 3 MB";
+            {   
                 lblUploadMessage.Visible = true;
-                return null;
+                lblUploadMessage.Text = "图片文件大小不可超过 3 MB";
+
+                return "error";
             }
 
             //string picPath = fulPicture.PostedFile.FileName;
@@ -103,7 +105,8 @@ public partial class editWork : System.Web.UI.Page
         int id = Convert.ToInt32(Request.QueryString["id"]);
 
         //删除旧封面图片
-        if (workPicName != null) //此时：已上传新封面图片，文件名未写入数据库
+        if (workPicName == "error") return;
+        else//此时：已上传新封面图片，文件名未写入数据库
         {
             string oldCoverPic = "";
             using (var db = new ITStudioEntities())
@@ -121,13 +124,13 @@ public partial class editWork : System.Web.UI.Page
                     System.IO.File.Delete(oldCoverPicPath); //删除文件
                 }
             }
-    }
+        }
         using (var db = new ITStudioEntities())
         {
             //修改works表
             works work = db.works.SingleOrDefault(a => a.id == id);
             work.typeId = Convert.ToInt32(ddlType.SelectedValue);
-            if (workPicName != null)
+            if (workPicName != null&&workPicName!="error")
             {
                 work.picture = workPicName; // 修改了图片的情况
                 ImgCurrentWorkPic.ImageUrl = workPicName;

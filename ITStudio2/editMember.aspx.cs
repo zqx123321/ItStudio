@@ -70,14 +70,14 @@ public partial class editMember : System.Web.UI.Page
             {
                 lblUploadMessage.Text = "只能上传图片类型文件！";
                 lblUploadMessage.Visible = true;
-                return null;
+                return "error";
             }
 
             if (fulPhoto.FileContent.Length > maxFileSize) // 限制为3MiB以下
             {
                 lblUploadMessage.Text = "图片文件大小不可超过 3 MB";
                 lblUploadMessage.Visible = true;
-                return null;
+                return "error";
             }
             string f1 = DateTime.Now.ToFileTime().ToString() + ".jpg";
             string path = "./Images/" + f1;
@@ -88,7 +88,7 @@ public partial class editMember : System.Web.UI.Page
         }
         else
         {
-            lblUploadMessage.Text = "请选择文件";
+           
             return null;
         }
     }
@@ -105,14 +105,14 @@ public partial class editMember : System.Web.UI.Page
             {
                 lblUploadMessage.Text = "只能上传图片类型文件！";
                 lblUploadMessage.Visible = true;
-                return null;
+                return "error";
             }
 
             if (fulIco.FileContent.Length > maxFileSize) // 限制为3MiB以下
             {
                 lblUploadMessage.Text = "图片文件大小不可超过 3 MB";
                 lblUploadMessage.Visible = true;
-                return null;
+                return "error";
             }
             string f1 = DateTime.Now.ToFileTime().ToString() + ".jpg";
             string path = "./Images/" + f1;
@@ -121,11 +121,7 @@ public partial class editMember : System.Web.UI.Page
             lblUploadMessage.Visible = true;
             return path;
         }
-        else
-        {
-            lblUploadMessage.Text = "请选择文件";
-            return null;
-        }
+        else return null;
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -135,7 +131,7 @@ public partial class editMember : System.Web.UI.Page
         string workPhoName = uploadWorkPho();
         string workIcoName = uploadWorkIco();
         int id = Convert.ToInt32(Request.QueryString["id"]);
-      
+        if (workPhoName == "error" || workIcoName=="error") return;
         using (var db = new ITStudioEntities())
         {
             //修改works表
