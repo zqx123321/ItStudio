@@ -99,6 +99,13 @@
                                             &nbsp;&nbsp;
                                             <asp:Button ID="BtnJumpPage" runat="server" OnClick="BtnJumpPage_Click" Text="跳页" />
                                                   </div>
+                                              <asp:DropDownList ID="DdlSelect" runat="server" Height="36px" Width="99px" CssClass="site-title" Font-Size="Large">
+                                                    <asp:ListItem Value="1">美术设计</asp:ListItem>
+                                                    <asp:ListItem Value="2">程序开发</asp:ListItem>
+                                                    <asp:ListItem Value="3">系统维护</asp:ListItem>
+                                               </asp:DropDownList>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <asp:Button ID="BtnImport" runat="server" OnClick="BtnImport_Click" Text="导出申请" />
                                         </td>
                                     </tr>
                                 </table>

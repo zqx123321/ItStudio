@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -160,4 +162,48 @@ public partial class Applications : System.Web.UI.Page
         ArticlesBind(pageNum, pageSize);
         TxtPageNum.Text = pageNum.ToString();
     }
+    protected void BtnImport_Click(object sender, EventArgs e)
+    {
+        if (DdlSelect.SelectedValue == "1")
+        {
+            ExportDataGrid("美术设计", "application/ms-excel", "美工.xls");
+        }
+        else if (DdlSelect.SelectedValue == "2")
+        {
+            ExportDataGrid("程序开发", "application/ms-excel", "程序.xls");
+        }
+        else if (DdlSelect.SelectedValue == "3")
+        {
+            ExportDataGrid("系统维护", "application/ms-excel", "维护.xls");
+        }
+    }
+
+    private void ExportDataGrid(string Job, string FileType, string FileName) //从DataGrid导出  
+    {
+        System.Web.UI.WebControls.DataGrid dg = new System.Web.UI.WebControls.DataGrid();
+
+        using (var db = new ITStudioEntities())
+        {
+            var dt = from it in db.applications
+                     where it.job == Job
+                     select it;
+            dg.DataSource = dt.ToList();
+        }
+        dg.DataBind();
+
+        //定义文档类型、字符编码　　   
+        Response.Clear();
+        Response.AppendHeader("Content-Disposition", "attachment;filename=" + HttpUtility.UrlEncode(FileName, Encoding.UTF8).ToString());
+        Response.Charset = "UTF-8";
+        Response.ContentEncoding = Encoding.Default;
+        Response.ContentType = FileType;
+        dg.EnableViewState = false;
+        //定义一个输入流　　   
+        StringWriter tw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(tw);
+        //目标数据绑定到输入流输出　  
+        dg.RenderControl(hw); 
+        Response.Write(tw.ToString());
+        Response.End();
+    }  
 }
