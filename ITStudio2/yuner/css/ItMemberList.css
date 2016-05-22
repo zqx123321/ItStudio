@@ -1,0 +1,201 @@
+
+/*  全局定义部分  */
+.ItMember .Triangle{
+	/*display: none;*/
+}/*因为一开始显示照片屏蔽蒙板*/
+.ItMemberList{
+	position: relative;
+}
+.ItMember{
+	z-index:1;
+	cursor:pointer;
+}
+#ItMemberListContainer h5{
+	text-align: center;
+    color: white;
+    position:relative;
+    margin: 0px;
+    padding-top: 65px;
+    font: 26px/36px '黑体';
+}
+#ItMemberListContainer span{
+	font:18px/24px '黑体';
+	height:24px;
+	text-align:center;
+	color:white;
+	display:block;
+}
+#ItMemberListContainer{
+	width:900px;
+	height:464px;
+	margin:auto;
+	background-color:#eee;
+}
+.ItMemberList > ul {
+	padding-left:0px;
+	position:relative;
+}
+.ItMemberList > ul > li {
+	height:126px;
+	width:146px;
+	list-style:none;
+	position:absolute;
+}
+.ItMemberList > ul > li > div {
+	height:126px;
+	width:146px;
+}
+.MemberPhoto{
+	position:absolute;
+	top:0px;
+}
+
+/*双向箭头部分*/
+.ItMemberListLeftSign{
+	width:63px;
+	cursor:pointer;
+	height:86px;
+	position:absolute;
+	left:-63px;
+	top:160px;
+	background: url(../image/member_arrow_left.png)
+}
+
+.ItMemberListRightSign{
+	width:63px;
+	cursor:pointer;
+	height:86px;
+	position:absolute;
+	right:-63px;
+	top:160px;
+	background: url(../image/member_arrow_right.png)
+}
+
+/*年份显示块*/
+#ItMemberYear{
+	position:absolute;
+	height:160px;
+	width:380px;
+	bottom:0px;
+	right:0px;
+}
+
+
+
+
+
+/*  行定义部分  */
+.ItMemberListFirstLine{
+	margin-top:0px;
+	height:126px;
+	margin-bottom:10px;
+}
+.ItMemberListSecondLine{
+	margin-top:0px;
+	height:126px;
+	margin-bottom:10px;
+}
+.ItMemberListThirdLine{
+	margin-top:0px;
+	height:126px;
+	margin-bottom:0px;
+}
+
+
+
+
+
+/*  单元重复定位部分  */
+.ItMemberListThirdLine > li:first-child {
+	left:0px;
+}
+.ItMemberListThirdLine > li:first-child + li {
+	left:78px;
+	bottom:4px;
+}
+.ItMemberListThirdLine > li:first-child + li +li {
+	left:196px;
+}
+.ItMemberListThirdLine > li:first-child + li + li +li {
+	left: 274px;
+    bottom: 4px;
+}
+.ItMemberListSecondLine > li:first-child {
+	left:78px;
+}
+.ItMemberListSecondLine > li:first-child + li {
+	left:156px;
+	bottom:4px;
+}
+.ItMemberListSecondLine > li:first-child + li + li {
+	left:276px;
+}
+.ItMemberListSecondLine > li:first-child + li + li + li {
+	left: 354px;
+    bottom: 4px;
+}
+.ItMemberListSecondLine > li:first-child + li + li + li + li {
+	left: 672px;
+	bottom: 4px;
+}
+.ItMemberListSecondLine > li:first-child + li + li +li + li + li {
+	left: 750px;
+}
+.ItMemberListFirstLine > li:first-child {
+	left:160px;
+}
+.ItMemberListFirstLine > li:first-child + li {
+	left:238px;
+	bottom:4px;
+}
+.ItMemberListFirstLine > li:first-child + li + li {
+	left:358px;
+}
+.ItMemberListFirstLine > li:first-child + li + li + li {
+	left: 436px;
+    bottom: 4px;
+}
+.ItMemberListFirstLine > li:first-child + li + li + li + li {
+	left:514px;
+}
+.ItMemberListFirstLine > li:first-child + li + li + li + li + li {
+	left: 592px;
+    bottom: 4px;
+}
+.ItMemberListFirstLine > li:first-child + li + li + li + li + li +li {
+	left: 670px;
+}
+
+
+
+/*  分类定义部分  */
+.UpGreen{
+	background:url(../image/member_triangle_green_positive.png);
+}
+.DownGreen{
+	background:url(../image/member_triangle_green_inverted.png);
+}
+.UpYellow{
+	background:url(../image/member_triangle_yellow_positive.png);
+}
+.DownYellow{
+	background:url(../image/member_triangle_yellow_inverted.png);
+}
+.UpRed{
+	background:url(../image/member_triangle_red_positive.png);
+}
+.DownRed{
+	background:url(../image/member_triangle_red_inverted.png);
+}
+.UpBlue{
+	background:url(../image/member_triangle_blue_positive.png);
+}
+.DownBlue{
+	background:url(../image/member_triangle_blue_inverted.png);
+}
+.UpPurple{
+	background:url(../image/member_triangle_purple_positive.png);
+}
+.DownPurple{
+	background:url(../image/member_triangle_purple_inverted.png);
+}

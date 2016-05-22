@@ -147,16 +147,21 @@ public partial class seeMember : System.Web.UI.Page
 
     protected void BtnJumpPage_Click(object sender, EventArgs e)
     {
-        int pageNum = getPageNum();
+        int pageNum;
+        if (!Filter.IsNumeric(TxtPageNum.Text) || TxtPageNum.Text.Length > 8)
+            pageNum = 1;
+        else pageNum = Convert.ToInt32(TxtPageNum.Text);
         int pageSize = getPageSize();
+        int pageCount = getPageCount(pageSize);
         if (pageNum < 1)
         {
             pageNum = 1;
         }
-        else if (pageNum > pageSize)
+        else if (pageNum > pageCount)
         {
             pageNum = getPageCount(pageSize);
         }
+        Session["pagenum"] = pageNum;
         ArticlesBind(pageNum, pageSize);
         TxtPageNum.Text = pageNum.ToString();
     }

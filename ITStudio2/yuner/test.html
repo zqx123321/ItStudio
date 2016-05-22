@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./css/ItMemberList.css" type="text/css" />
+</head>
+<body>
+	<div id = "ItMemberListContainer">
+		
+		<div class = "ItMemberList">
+			<div class = "ItMemberListLeftSign"></div>
+			<ul class = "ItMemberListFirstLine">
+				<li class = "ItMember SwitchFirst TurnFirst">
+					<div class = "Triangle UpRed">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+				<li class = "TurnFirst">
+					<div class = "Triangle DownRed"></div>
+				</li>
+				<li class = "ItMember SwitchSecond TurnSecond">
+					<div class = "Triangle UpBlue">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+				<li class = "TurnSecond">
+					<div class = "Triangle DownBlue"></div>
+				</li>
+				<li class = "ItMember SwitchThird TurnThird">
+					<div class = "Triangle UpBlue">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+				<li class = "TurnThird">
+					<div class = "Triangle DownPurple"></div>
+				</li>
+				<li class = "ItMember SwitchThird TurnThird">
+					<div class = "Triangle UpPurple">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+			</ul>
+			<ul class = "ItMemberListSecondLine">
+				<li class = "ItMember SwitchFirst TurnFirst">
+					<div class = "Triangle UpYellow">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+				<li class = "TurnFirst">
+					<div class = "Triangle DownYellow"></div>
+				</li>
+				<li class = "ItMember SwitchSecond TurnSecond">
+					<div class = "Triangle UpRed">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+				<li class = "TurnSecond">
+					<div class = "Triangle DownRed"></div>
+				</li>
+				<li class = "TurnThird">
+					<div class = "Triangle DownPurple"></div>
+				</li>
+				<li class = "ItMember SwitchThird TurnThird">
+					<div class = "Triangle UpPurple">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+			</ul>
+			<ul class = "ItMemberListThirdLine">
+				<li class = "ItMember SwitchFirst TurnFirst">
+					<div class = "Triangle UpGreen">
+						<h5></h5>
+						<span></span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+				<li class = "TurnFirst">
+					<div class = "Triangle DownGreen"></div>
+				</li>
+				<li class = "ItMember SwitchSecond TurnSecond">
+					<div class = "Triangle UpYellow">
+						<h5>周尊康</h5>
+						<span>美工设计</span>
+					</div>
+					<div class = "MemberPhoto"></div>
+				</li>
+				<li class = "TurnSecond">
+					<div class = "Triangle DownYellow"></div>
+				</li>
+				<li id = "ItMemberYear">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</li>
+			</ul>
+			<div class = "ItMemberListRightSign"></div>
+		</div>
+		
+	</div>
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">
+	var verticalOpts = [{'width':0},{'width':'146px'}];
+	//设置了两种状态的参数，宽度0（隐藏），宽度146（显示）
+	var yearStatus=2013;
+
+	function turnback(myArr,opts,time){
+	//turnback函数对传过来的节点数组进行功能的绑定
+	//通过找到其下的'Triangle'和'MemberPhoto'类
+	//并设置hover及回调函数实现效果
+ 	var i = 0;
+ 	//对数组进行遍历
+ 	for(i = 0;i < myArr.length;i++)
+ 	{
+ 		var $t =$(myArr[i]);
+ 		//因为只有jquery对象能用jquery方法，所以将原生JS对象变成了JQUERY $对象
+ 		$t.hover(function(){
+ 			$(this).find('.MemberPhoto').stop().animate(opts[0],time,function(){
+ 			//1.找到相片 2.清动画队列 3.动画：宽度渐变为0 模拟翻转
+ 				$(this).prev().width(0);
+ 				//将待展示面设置为无宽度
+ 				$(this).hide().prev().show();
+ 				//1.模拟完成后 相片隐藏 2.找到前一个节点（蒙板） 3.显示蒙板
+ 				$(this).prev().animate(opts[1],time);
+ 				//1.找到蒙板 2.蒙板宽度变化到最大值 模拟被翻出
+ 			})
+ 		},function(){
+ 			//回调函数进行逆操作，略
+ 			$(this).find('.Triangle').animate(opts[0],time,function(){
+				$(this).next().width(0);
+				$(this).hide().next().show();
+				$(this).next().animate(opts[1],time);
+				});
+ 			})
+ 		}
+	}
+
+ 	var arr = $('.ItMember')
+ 	
+ 	// setTimeout(function(){turnback(arr,verticalOpts,100)},1000)
+ 	
+ 	function ClearInnerAll(){
+ 		var $turn1 = $('.SwitchFirst');
+ 		var $turn2 = $('.SwitchSecond');
+ 		var $turn3 = $('.SwitchThird');
+ 		var $turnArr = [$turn1,$turn2,$turn3];
+ 		for(j=0;j<$turnArr.length;j++){
+ 			$onTurnArr = $($turnArr[j]);
+	 		for(i=0;i<$onTurnArr.length;i++){
+	 			$turnP = $($onTurnArr[i]);
+	 			$turnP.find('.Triangle').find('h5')[0].innerHTML="";
+	 			$turnP.find('.Triangle').find('span')[0].innerHTML="";
+	 		}
+	 	}
+ 	}
+ 	
+ 	function TurnBackAll(opts,time){
+ 		var $turn1 = $('.TurnFirst');
+ 		var $turn2 = $('.TurnSecond');
+ 		var $turn3 = $('.TurnThird');
+ 		var $turnArr = [$turn1,$turn2,$turn3];
+ 		var opts = [{'width':0},{'width':'146px'}];
+ 		for(j=0;j<$turnArr.length;j++){
+ 			$onTurnArr = $($turnArr[j]);
+	 		for(i=0;i<$onTurnArr.length;i++){
+	 			$turnP = $($onTurnArr[i]);
+	 			if($turnP.find('.Triangle').find('h5')[0]!=undefined){
+	 				if($turnP.find('.Triangle').find('h5')[0].innerHTML!=""){
+			 			$turnP.find('.MemberPhoto').stop().animate(opts[0],time,function(){
+		 				$(this).prev().width(0);
+		 				$(this).hide();
+		 				$(this).prev().show();
+		 				$(this).prev().animate(opts[1],time);
+		 				});
+	 				}
+	 			}
+	 		}
+	 	}
+ 	}
+
+ 	function AjaxForMemberList(year) {
+ 	    console.log(year);
+ 		var $turn1 = $('.SwitchFirst');
+ 		var $turn2 = $('.SwitchSecond');
+ 		var $turn3 = $('.SwitchThird');
+ 		var $turnArr = [$turn1,$turn2,$turn3];
+ 		$.ajax({
+ 			type:'POST',
+ 			data:{year:year},
+ 			url:"../APIforyuner.ashx",
+ 			success: function (data) {
+ 			    console.log("success");
+				var $MemList = $.parseJSON(data);
+				var RMemList = $MemList;
+				var $l = 0;
+				
+				for(j=0;j<=$turnArr.length;j++){
+ 					$onTurnArr = $($turnArr[j]);
+	 				for(i=0;i<=$onTurnArr.length;i++){
+		 				$turnP = $($onTurnArr[i]);
+		 				if($l<$MemList.length){
+		 					var $MemPhoto=$($turnP.find('.MemberPhoto')[0])
+		 					var RMemPhoto = $MemPhoto[0];
+		 					
+		 					RMemPhoto.style.background="url("+$MemList[$l].photo+")";
+		 					// $MemPhoto.css("background-image",$MemList[$l].url);
+	 							var opts = [{'width':0},{'width':'146px'}];
+	 							$turnP.find('.Triangle').animate(opts[0],200,function(){
+									$(this).next().width(0);
+									$(this).hide().next().show();
+									$(this).next().animate(opts[1],200);
+								})
+								
+								$turnP.unbind('mouseenter').unbind('mouseleave');
+	 							$turnP.hover(function(){
+						 			$(this).find('.MemberPhoto').stop().animate(opts[0],200,function(){
+						 				$(this).prev().width(0);
+						 				$(this).hide().prev().show();
+						 				$(this).prev().animate(opts[1],200);
+						 			})
+						 		},function(){
+						 			$(this).find('.Triangle').animate(opts[0],200,function(){
+										$(this).next().width(0);
+										$(this).hide().next().show();
+										$(this).next().animate(opts[1],200);
+										});
+						 			})
+	 							$turnP.find('.Triangle').find('h5')[0].innerHTML=$MemList[$l].name;
+	 							$turnP.find('.Triangle').find('span')[0].innerHTML=$MemList[$l].job;
+		 				}
+		 				else{
+		 					var $MemPhoto=$($turnP.find('.MemberPhoto')[0])
+		 					$MemPhoto.css("background-image","fanyi.png");
+		 					$turnP.unbind('mouseenter').unbind('mouseleave');
+		 				}
+		 				$l++;
+		 			}
+	 			}
+			}
+		})
+ 	}
+ 	function SignEventBind(){
+ 		$Lsign = $($('.ItMemberListLeftSign')[0])
+ 		$Rsign = $($('.ItMemberListRightSign')[0])
+ 		$Lsign.hover(function(){
+ 			$Lsign.stop().animate({left:"-73px"},200)
+ 		},function(){
+ 			$Lsign.stop().animate({left:"-63px"},200)
+ 		})
+ 		$Rsign.hover(function(){
+ 			$Rsign.stop().animate({right:"-73px"},200)
+ 		},function(){
+ 			$Rsign.stop().animate({right:"-63px"},200)
+ 		})
+ 		$Lsign.on("click",function(){
+ 			yearStatus--;
+ 			TurnBackAll();
+ 			ClearInnerAll();
+ 			setTimeout(function(){AjaxForMemberList(yearStatus)},3000)
+ 		})
+ 		$Rsign.on("click",function(){
+ 			yearStatus++;
+ 			TurnBackAll();
+ 			ClearInnerAll();
+ 			setTimeout(function(){AjaxForMemberList(yearStatus)},3000)
+ 		})
+ 	}
+ 	SignEventBind()
+ 	setTimeout(function(){AjaxForMemberList(yearStatus)},1000)
+	
+	</script>
+</body>
+</html>

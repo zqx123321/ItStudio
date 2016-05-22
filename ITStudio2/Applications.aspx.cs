@@ -149,19 +149,25 @@ public partial class Applications : System.Web.UI.Page
 
     protected void BtnJumpPage_Click(object sender, EventArgs e)
     {
-        int pageNum = getPageNum();
+        int pageNum;
+        if (!Filter.IsNumeric(TxtPageNum.Text) || TxtPageNum.Text.Length > 8)
+            pageNum = 1;
+        else pageNum = Convert.ToInt32(TxtPageNum.Text);
         int pageSize = getPageSize();
+        int pageCount = getPageCount(pageSize);
         if (pageNum < 1)
         {
             pageNum = 1;
         }
-        else if (pageNum > pageSize)
+        else if (pageNum > pageCount)
         {
             pageNum = getPageCount(pageSize);
         }
+        Session["pagenum"] = pageNum;
         ArticlesBind(pageNum, pageSize);
         TxtPageNum.Text = pageNum.ToString();
     }
+
     protected void BtnImport_Click(object sender, EventArgs e)
     {
         if (DdlSelect.SelectedValue == "1")
@@ -175,6 +181,14 @@ public partial class Applications : System.Web.UI.Page
         else if (DdlSelect.SelectedValue == "3")
         {
             ExportDataGrid("系统维护", "application/ms-excel", "维护.xls");
+        }
+        else if (DdlSelect.SelectedValue == "4")
+        {
+            ExportDataGrid("创客空间", "application/ms-excel", "创客.xls");
+        }
+        else if (DdlSelect.SelectedValue == "3")
+        {
+            ExportDataGrid("UI设计", "application/ms-excel", "UI.xls");
         }
     }
 

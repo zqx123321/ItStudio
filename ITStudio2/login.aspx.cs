@@ -62,7 +62,7 @@ public partial class login : System.Web.UI.Page
         {
             captchaAnswer = Session["Code"].ToString();
         }
-        if (captcha != captchaAnswer&&captcha!="woshibendan")
+        if (captcha != captchaAnswer)
         {
             Response.Write("<script>alert('验证码错误')</script>");
         }
@@ -91,18 +91,18 @@ public partial class login : System.Web.UI.Page
     {
         TxtCaptcha.Text = UserName.Text = Password.Text = " ";
     }
-    protected void want_Click(object sender, EventArgs e)
-    {
-        question.Visible = true;
-        submit.Visible = true;
-        answer.Visible = true;
+    //protected void want_Click(object sender, EventArgs e)
+    //{
+    //    question.Visible = true;
+    //    submit.Visible = true;
+    //    answer.Visible = true;
 
-    }
-    protected void submit_Click(object sender, EventArgs e)
-    {
-        if (answer.Text == "是")
-            right.Visible = true;
-        else
-            Response.Write("<script>alert('孩子，慢慢输吧'),location='Login.aspx' </script>");
-    }
+    //}
+    //protected void submit_Click(object sender, EventArgs e)
+    //{
+    //    if (answer.Text == "是")
+    //        right.Visible = true;
+    //    else
+    //        Response.Write("<script>alert('孩子，慢慢输吧'),location='Login.aspx' </script>");
+    //}
 }

@@ -78,7 +78,7 @@
                             </tr>
                         </table>
                         <ul class="RM">
-                            <li><a href="changeAdmin.aspx" target="main">修改密码</a></li>
+                            <li><a href="changeAdmin.aspx" target="main">修改信息</a></li>
                             <li><a href="addAdmin.aspx" target="main">添加管理员</a></li>
                         </ul>
                     </div>

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+   <title>@actionName</title>
+</head>
+<body>
+            用户名: <input id="name" type="text" />
+            密码:<input type="text"id="pwd" " />
+            <input type="submit" name="btnOK" value="提交"  onclick="ConfirmChange()"/>
+            <script type="text/javascript" src="jquery-2.2.3.min.js"></script>
+         <script type="text/javascript">
+            function ConfirmChange() {
+                $.ajax({
+                    type: "POST",    //页面请求的类型，通常使用POST,那么处理页需要使用Request.Form["参数名称"]来获取页面传递的参数
+                    url: "Handler.ashx",   //处理页的相对地址
+                    data: {name: $("#name").val(),password:$("#pwd").val()},
+                    success: function (msg) {    //这是处理后执行的函数，msg是处理页返回的数据
+                        alert(msg);
+                    }
+                });
+            }
+        </script>
+</body>

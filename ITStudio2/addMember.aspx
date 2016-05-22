@@ -65,6 +65,8 @@
                                                                     <asp:ListItem>程序开发</asp:ListItem>
                                                                     <asp:ListItem>前端设计</asp:ListItem>
                                                                     <asp:ListItem>系统维护</asp:ListItem>
+                                                                    <asp:ListItem>创客空间</asp:ListItem>                         
+                                                                    <asp:ListItem>UI设计</asp:ListItem>
                                                                </asp:DropDownList>
                                                                                                             </td>
                                                         <td>设置成员部门<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddlDeparement"
